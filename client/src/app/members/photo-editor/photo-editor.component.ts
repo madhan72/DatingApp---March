@@ -1,7 +1,7 @@
 import { MembersService } from './../../_services/members.service';
 import { take } from 'rxjs/operators';
 import { AccountService } from './../../_services/account.service';
-import { environment } from './../../../environments/environment.prod';
+import { environment } from './../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { Member } from 'src/app/_models/member';
@@ -29,7 +29,6 @@ export class PhotoEditorComponent implements OnInit {
     this.initializeUploader();
   }
 
-
   fileOverBase(e: any) {
     this.hasBaseDropzoneOver = e;
   }
@@ -48,10 +47,11 @@ export class PhotoEditorComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'users/add-photo/',
+      // url: this.baseUrl + 'users/add-photo',
 
-      // url: 'https://localhost:4200/api/users/add-photo',
-
+      // url: 'https://localhost:5001/api/users/add-photo',
+      
+      url: this.baseUrl + 'users/add-photo',
       authToken: 'Bearer ' + this.user.token,
       isHTML5: true,
       allowedFileType: ['image'],
@@ -66,8 +66,15 @@ export class PhotoEditorComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
-        const photo = JSON.parse(response);
+        const photo: Photo = JSON.parse(response);
         this.member.photos.push(photo);
+
+        if (photo.isMain) {
+          this.user.photoUrl = photo.url;
+          this.member.photoUrl = photo.url;
+          this.accountService.setCurrentUser(this.user);
+        }
+        
       }
     }
 

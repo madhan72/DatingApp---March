@@ -1,18 +1,25 @@
 {
     "version": "0.2.0",
     "configurations": [
+    {
+        "name": "Launch Chrome",
+        "request": "launch",
+        "type": "pwa-chrome",
+        "url": "http://localhost:4200",
+        "webRoot": "${workspaceFolder}/client"
+    },
 
-        {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "pwa-chrome",
-            "url": "https://localhost:4200",
-            "webRoot": "${workspaceFolder}",
-            "sourceMaps": true,
-            "sourceMapPathOverrides": {
-                "*": "${webRoot}/*"
-            }
-        },
+        // {
+        //     "name": "Launch Chrome",
+        //     "request": "launch",
+        //     "type": "pwa-chrome",
+        //     "url": "https://localhost:4200",
+        //     "webRoot": "${workspaceFolder}",
+        //     "sourceMaps": true,
+        //     "sourceMapPathOverrides": {
+        //         "*": "${webRoot}/*"
+        //     }
+        // },
     
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
