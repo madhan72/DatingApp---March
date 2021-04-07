@@ -1,3 +1,4 @@
+import { MemberDetailResolver } from './_resolvers/member-detailed.resolver';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
@@ -21,7 +22,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
         { path:'members', component: MemberListComponent},
-        { path:'members/:username', component: MemberDetailComponent},
+        { path:'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailResolver}},
         { path:'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
         { path:'lists', component: ListsComponent},
         { path:'messages', component: MessagesComponent},
