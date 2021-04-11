@@ -54,7 +54,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMEssagesForUser([FromQuery] 
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery] 
             MessageParams messageParams)
         {
             messageParams.Username = User.GetUsername();
